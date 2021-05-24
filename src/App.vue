@@ -21,7 +21,7 @@
         <input type="text" size="25" v-model="deviceId" />
       </div>
       <div class="qrCode">
-       <qrcode-vue size ="200" :value="newQRCode"></qrcode-vue>
+       <qrcode-vue size ="200" level="M" :value="newQRCode"></qrcode-vue>
       </div>
       <br />
       <br />
@@ -54,16 +54,23 @@ export default {
   name: 'App',
   data() {
     return {
-      value : 'asdfasdfasdfasdfsdfa',
       showSettings : true,
       showQR:false,
       deviceId: "de",
-      idScope: '0ne002CD355',
-      masterKey: 'xPWEtZjR5kFcYxSm0l35DzgfAWb44aXHvGKfTDQMB8cuyid7NZofOJB6OYxytahunq6suar2sXRRgmKlkPeKjQ==',
+      idScope: '',
+      masterKey: '',
       payload : '',
       b64: ''
     }
   },
+  created () {
+        const savedSettings = JSON.parse(window.localStorage.getItem('dpsSettings') || '{}')
+        if (savedSettings.idScope)
+        {
+            this.idScope = savedSettings.idScope
+            this.masterKey = savedSettings.masterKey
+        }
+    },
   methods: {
         showSettingsButton () {
             this.showSettings = true,
@@ -76,8 +83,10 @@ export default {
                     masterKey: this.masterKey
                 })
             )
+            this.deviceId = 'dev-' + Date.now()
             this.showSettings = false
             this.showQR = true
+
         }
     },
   components: {
@@ -92,9 +101,8 @@ export default {
                 .then( DeviceKey => {
                     this.payload = JSON.stringify({ScopeId,DeviceId,DeviceKey})
                     this.b64 = btoa(this.payload)
-                    this.payload = this.payload;
             })
-          return this.payload
+          return this.b64
         },
   }
 }
@@ -110,10 +118,6 @@ export default {
   margin-top: 60px;
   margin:10px
 }
-.qrCode {
-  margin:20px;
-  padding:20px;
-  border: 2px solid grey;
-}
+
 
 </style>
