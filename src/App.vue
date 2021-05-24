@@ -21,13 +21,13 @@
         <input type="text" size="25" v-model="deviceId" />
       </div>
       <div class="qrCode">
-       <qrcode-vue size ="200" level="M" :value="newQRCode"></qrcode-vue>
+       <qrcode-vue size="200" level="M" :value="newQRCode"></qrcode-vue>
       </div>
       <br />
       <br />
        <div class="debugInfo">
         <h3>QR contents</h3>
-        <textarea cols="25" rows="7">{{b64}}</textarea>
+        <textarea cols="25" rows="7" v-model="b64"></textarea>
         <pre>{{pretty}}</pre>
        </div>
   </div>
@@ -93,7 +93,7 @@ export default {
    //  HelloWorld,
     QrcodeVue
   },
-  computed: {
+  asyncComputed: {
     newQRCode() {
             const ScopeId = this.idScope
             const DeviceId = this.deviceId
