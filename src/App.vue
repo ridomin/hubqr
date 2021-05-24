@@ -20,7 +20,9 @@
         <label for="deviceID">Device Id</label>
         <input type="text" size="25" v-model="deviceId" />
       </div>
-       <qrcode-vue size ="300" :value="newQRCode"></qrcode-vue>
+      <div class="qrCode">
+       <qrcode-vue size ="200" :value="newQRCode"></qrcode-vue>
+      </div>
       <br />
       <br />
        <div>
@@ -106,6 +108,12 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  margin:10px
+}
+.qrCode {
+  margin:20px;
+  padding:20px;
+  border: 2px solid grey;
 }
 
 </style>
