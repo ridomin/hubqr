@@ -25,9 +25,10 @@
       </div>
       <br />
       <br />
-       <div>
-        <textarea cols="65" rows="2">{{b64}}</textarea>
-        <pre>{{payload}}</pre>
+       <div class="debugInfo">
+        <h3>QR contents</h3>
+        <textarea cols="25" rows="7">{{b64}}</textarea>
+        <pre>{{pretty}}</pre>
        </div>
     </div>
   </div>
@@ -59,7 +60,7 @@ export default {
       deviceId: "de",
       idScope: '',
       masterKey: '',
-      payload : '',
+      payload : '{}',
       b64: ''
     }
   },
@@ -102,8 +103,11 @@ export default {
                     this.payload = JSON.stringify({ScopeId,DeviceId,DeviceKey})
                     this.b64 = btoa(this.payload)
             })
-          return this.b64
-        },
+      return this.b64
+    },
+    pretty () {
+      return JSON.stringify(JSON.parse(this.payload), null, 2)
+    }
   }
 }
 </script>
@@ -118,6 +122,18 @@ export default {
   margin-top: 60px;
   margin:10px
 }
-
-
+div {
+  margin: 5px;
+}
+.qrCode {
+  margin-top:20px;
+}
+.debugInfo {
+  margin-top:10px;
+  padding:5px;
+  background-color:silver;
+}
+pre {
+  text-align:left;
+}
 </style>
