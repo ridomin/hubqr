@@ -30,7 +30,6 @@
         <textarea cols="25" rows="7">{{b64}}</textarea>
         <pre>{{pretty}}</pre>
        </div>
-    </div>
   </div>
    
    </div>
