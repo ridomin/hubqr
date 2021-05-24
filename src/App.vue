@@ -31,8 +31,6 @@
         <pre>{{pretty}}</pre>
        </div>
   </div>
-   
-   </div>
 </template>
 
 <script>
