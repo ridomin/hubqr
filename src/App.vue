@@ -93,11 +93,11 @@ export default {
   },
   computed: {
     newQRCode() {
-            const ScopeId = this.idScope
-            const DeviceId = this.deviceId
+            const scopeId = this.idScope
+            const deviceId = this.deviceId
             createHmac(this.masterKey, this.deviceId)
-                .then( DeviceKey => {
-                    this.payload = JSON.stringify({ScopeId,DeviceId,DeviceKey})
+                .then( deviceKey => {
+                    this.payload = JSON.stringify({scopeId,deviceId,deviceKey})
                     this.b64 = btoa(this.payload)
             })
       return this.b64
